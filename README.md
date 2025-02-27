@@ -31,5 +31,5 @@ In `login_view` and `profile_view` functions the `@csrf_exempt` decorator disabl
 This flaw can be fixed by removing both `@csrf_exempt` decorators. Also, the `{% csrf_token %}` lines in the HTML templates should be uncommented. The exact source links for the flaws are provided above.
 
 ### Screenshots
-- Before: https://github.com/levomaaa/csbproject1/tree/main/screenshots/flaw-1-before-1.png
-- After: https://github.com/levomaaa/csbproject1/tree/main/screenshots/flaw-1-after-1.png
+- Before: https://github.com/levomaaa/csbproject1/blob/main/screenshots/flaw-1/flaw-1-before-1.png
+- After: https://github.com/levomaaa/csbproject1/blob/main/screenshots/flaw-1/flaw-1-after-1.png
