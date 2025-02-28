@@ -31,8 +31,8 @@ In `login_view` and `profile_view` functions the `@csrf_exempt` decorator disabl
 This flaw can be fixed by removing both `@csrf_exempt` decorators. Also, the `{% csrf_token %}` lines in the HTML templates should be uncommented. The exact source links for the flaws are provided above.
 
 ### Screenshots
-- Before: https://github.com/levomaaa/csbproject1/blob/main/screenshots/flaw-1/flaw-1-before-1.png
-- After: https://github.com/levomaaa/csbproject1/blob/main/screenshots/flaw-1/flaw-1-after-1.png
+- [Before](https://github.com/levomaaa/csbproject1/blob/main/screenshots/flaw-1/flaw-1-before-1.png)
+- [After](https://github.com/levomaaa/csbproject1/blob/main/screenshots/flaw-1/flaw-1-after-1.png)
 
 ## Flaw 2 - Broken Access Control
 
@@ -47,6 +47,6 @@ The flaw exists in `profile_view` function. This flaw allows any user (logged in
 We add four lines of code to the `profile_view` which check that the profile editor is the logged-in profile owner. The fix is shown here: https://github.com/levomaaa/csbproject1/blob/main/pages/views.py#L32.
 
 ### Screenshots
-- Before: https://github.com/levomaaa/csbproject1/blob/main/screenshots/flaw-2/flaw-2-before-1.png
-- After 1/2: https://github.com/levomaaa/csbproject1/blob/main/screenshots/flaw-2/flaw-2-after-1.png
-- After 2/2: https://github.com/levomaaa/csbproject1/blob/main/screenshots/flaw-2/flaw-2-after-2.png
+- [Before](https://github.com/levomaaa/csbproject1/blob/main/screenshots/flaw-2/flaw-2-before-1.png)
+- [After 1/2](https://github.com/levomaaa/csbproject1/blob/main/screenshots/flaw-2/flaw-2-after-1.png)
+- [After 2/2](https://github.com/levomaaa/csbproject1/blob/main/screenshots/flaw-2/flaw-2-after-2.png)
