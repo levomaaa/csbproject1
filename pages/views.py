@@ -29,7 +29,7 @@ def logout_view(request):
 # FIX: CSRF --> remove the @csrf_exempt below
 @csrf_exempt  
 def profile_view(request, username): 
-    # FIX: Broken Access Control --> take the lines below out of comments
+    # FIX: Broken Access Control --> take the four lines below out of comments
     #if not request.user.is_authenticated:
     #    return redirect('/')
     #if request.user.username != username:  

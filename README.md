@@ -33,3 +33,20 @@ This flaw can be fixed by removing both `@csrf_exempt` decorators. Also, the `{%
 ### Screenshots
 - Before: https://github.com/levomaaa/csbproject1/blob/main/screenshots/flaw-1/flaw-1-before-1.png
 - After: https://github.com/levomaaa/csbproject1/blob/main/screenshots/flaw-1/flaw-1-after-1.png
+
+## Flaw 2 - Broken Access Control
+
+The flaw occurs here: https://github.com/levomaaa/csbproject1/blob/main/pages/views.py#L31
+
+### Description
+
+The flaw exists in `profile_view` function. This flaw allows any user (logged in or not) to modify any users profiles by sending a `POST`request to `/profile/<username>/`. There is no check to verify that the logged-in user is editing their own profile.
+
+### Fix
+
+We add four lines of code to the `profile_view` which check that the profile editor is the logged-in profile owner. The fix is shown here: https://github.com/levomaaa/csbproject1/blob/main/pages/views.py#L32.
+
+### Screenshots
+- Before: https://github.com/levomaaa/csbproject1/blob/main/screenshots/flaw-2/flaw-2-before-1.png
+- After 1/2: https://github.com/levomaaa/csbproject1/blob/main/screenshots/flaw-2/flaw-2-after-1.png
+- After 2/2: https://github.com/levomaaa/csbproject1/blob/main/screenshots/flaw-2/flaw-2-after-2.png
