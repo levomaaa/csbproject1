@@ -6,6 +6,7 @@
 <body>  
     <h2>Update Profile</h2>  
     <form method="post">  
+        <!--FIX: CSRF -> take the line {% csrf_token %} below out of comments--> 
         <!--{% csrf_token %}-->  
         {{ form.as_p }}  
         <button type="submit">Save</button>  
