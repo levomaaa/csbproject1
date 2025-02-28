@@ -10,7 +10,7 @@ LINK: https://github.com/levomaaa/csbproject1
 4. Start the application by command `python3 manage.py runserver`.
 5. You can log in with either using username: `kalle` password: `1234` or username: `pirkka` password: `0000`.
 
-## FLAW 1 - Cross-Site Request Forgery (CSRF)
+## Flaw 1 - Cross-Site Request Forgery (CSRF)
 
 This flaw occurs in two different cases below.
 
@@ -50,3 +50,18 @@ We add four lines of code to the `profile_view` which check that the profile edi
 - [Before](https://github.com/levomaaa/csbproject1/blob/main/screenshots/flaw-2/flaw-2-before-1.png)
 - [After 1/2](https://github.com/levomaaa/csbproject1/blob/main/screenshots/flaw-2/flaw-2-after-1.png)
 - [After 2/2](https://github.com/levomaaa/csbproject1/blob/main/screenshots/flaw-2/flaw-2-after-2.png)
+
+## Flaw 3 - Cryptographic Failures
+
+I have my `SECRET_KEY`shown in the code and in Github. It's located here: https://github.com/levomaaa/csbproject1/blob/main/csbproject1/settings.py#L30.
+
+### Description
+
+The `SECRET_KEY`is hardcoded in `settings.py` which is a cryptographic flaw. When the `SECRET_KEY` is exposed, anyone who has access to it could potentially forge session cookies, CSRF tokens, etc. That way the attacker could access some other users profile information. 
+
+### Fix
+Remove the hardcoded `SECRET_KEY` from `settings.py`. Create a `.env`file in your project directory and put the `SECRET_KEY`to the file. Address the `.env` file from `settings.py`. The fix is shown here: https://github.com/levomaaa/csbproject1/blob/main/csbproject1/settings.py#L24.
+
+### Screenshots
+- [Before](https://github.com/levomaaa/csbproject1/blob/main/screenshots/flaw-3/flaw-3-before-1.png)
+- [After](https://github.com/levomaaa/csbproject1/blob/main/screenshots/flaw-3/flaw-3-after-1.png)
