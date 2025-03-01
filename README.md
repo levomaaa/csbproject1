@@ -28,7 +28,7 @@ In `login_view` and `profile_view` functions the `@csrf_exempt` decorator disabl
 
 ### Fix
 
-This flaw can be fixed by removing both `@csrf_exempt` decorators. Also, the `{% csrf_token %}` lines in the HTML templates should be uncommented. The exact source links for the flaws are provided above.
+This flaw can be fixed by removing both `@csrf_exempt` decorators. Also, the `{% csrf_token %}` lines in the HTML templates should be uncommented. The exact source links for the flaws and fixes are provided above.
 
 ### Screenshots
 
@@ -85,3 +85,24 @@ Set the `DEBUG = True` in `settings.py` as `DEBUG = False`. Then the attacker is
 
 - [Before](https://github.com/levomaaa/csbproject1/blob/main/screenshots/flaw-4/flaw-4-before-1.png)
 - [After](https://github.com/levomaaa/csbproject1/blob/main/screenshots/flaw-4/flaw-4-after-1.png)
+
+## Flaw 5 - Insecure Design
+
+I don't have a limit for login attempts. Located here: https://github.com/levomaaa/csbproject1/blob/main/pages/views.py#L13.
+
+### Description
+
+Method `login_view` in `views.py` does not contain any login limiting or brute force protection. Attackers can brute-force passwords by submitting multiple login requests without any limitations. This means that the account remains accessible even after multiple failed login attempts, unlike standard security practices that enforce lockouts. This could allow the attacker to gain unauthorized access by guessing weak passwords or using automated tools to do that.
+
+### Fix 
+
+We will fix this by tracking failed login attempts and limiting them to 5. After 5 failed login attempts the users account is locked for 30 seconds and after that they can try again. Error is shown after 5 failed attempts as shown in the screenshots. The fixes are shown in four parts below:
+- Fix 1/4: https://github.com/levomaaa/csbproject1/blob/main/pages/views.py#L11
+- Fix 2/4: https://github.com/levomaaa/csbproject1/blob/main/pages/views.py#L23
+- Fix 3/4: https://github.com/levomaaa/csbproject1/blob/main/pages/views.py#L34
+- Fix 4/4: https://github.com/levomaaa/csbproject1/blob/main/pages/views.py#L39
+
+### Screenshots
+
+- [Before](https://github.com/levomaaa/csbproject1/blob/main/screenshots/flaw-5/flaw-5-before-1.png)
+- [After](https://github.com/levomaaa/csbproject1/blob/main/screenshots/flaw-5/flaw-5-after-1.png)
