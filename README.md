@@ -15,11 +15,11 @@ LINK: https://github.com/levomaaa/csbproject1
 This flaw occurs in two different cases below.
 
 Case 1:
-- https://github.com/levomaaa/csbproject1/blob/main/pages/views.py#L12
+- https://github.com/levomaaa/csbproject1/blob/main/pages/views.py#L19
 - https://github.com/levomaaa/csbproject1/blob/main/pages/templates/index.html#L10
 
 Case 2:
-- https://github.com/levomaaa/csbproject1/blob/main/pages/views.py#L30
+- https://github.com/levomaaa/csbproject1/blob/main/pages/views.py#L56
 - https://github.com/levomaaa/csbproject1/blob/main/pages/templates/profile.html#L10
 
 ### Description
@@ -37,7 +37,7 @@ This flaw can be fixed by removing both `@csrf_exempt` decorators. Also, the `{%
 
 ## Flaw 2 - Broken Access Control
 
-The flaw occurs here: https://github.com/levomaaa/csbproject1/blob/main/pages/views.py#L31
+This flaw allows anyone to edit others profiles without logging in. The flaw occurs here: https://github.com/levomaaa/csbproject1/blob/main/pages/views.py#L57.
 
 ### Description
 
@@ -45,7 +45,7 @@ The flaw exists in `profile_view` function. This flaw allows any user (logged in
 
 ### Fix
 
-We add four lines of code to the `profile_view` which check that the profile editor is the logged-in profile owner. The fix is shown here: https://github.com/levomaaa/csbproject1/blob/main/pages/views.py#L32.
+We add four lines of code to the `profile_view` which checks that the profile editor is the logged-in profile owner. The fix is shown here: https://github.com/levomaaa/csbproject1/blob/main/pages/views.py#L59.
 
 ### Screenshots
 
@@ -62,7 +62,8 @@ I have my `SECRET_KEY`shown in the code and in Github. It's located here: https:
 The `SECRET_KEY`is hardcoded in `settings.py` which is a cryptographic flaw. When the `SECRET_KEY` is exposed, anyone who has access to it could potentially forge session cookies, CSRF tokens, etc. That way the attacker could access some other users profile information. 
 
 ### Fix
-Remove the hardcoded `SECRET_KEY` from `settings.py`. Create a `.env`file in your project directory and put the `SECRET_KEY`to the file. Address the `.env` file from `settings.py`. The fix is shown here: https://github.com/levomaaa/csbproject1/blob/main/csbproject1/settings.py#L24.
+
+Remove the hardcoded `SECRET_KEY` from `settings.py`. Create a `.env`file in your project directory and put the `SECRET_KEY` to the file. Address the `.env` file from `settings.py`. The fix is shown here: https://github.com/levomaaa/csbproject1/blob/main/csbproject1/settings.py#L24.
 
 ### Screenshots
 
@@ -71,15 +72,15 @@ Remove the hardcoded `SECRET_KEY` from `settings.py`. Create a `.env`file in you
 
 ## Flaw 4 - Security Misconfiguration
 
-Djangos debug mode is enabled in `settings.py`. Located here: https://github.com/levomaaa/csbproject1/blob/main/csbproject1/settings.py#L33.
+Djangos debug mode is enabled in `settings.py`. Located here: https://github.com/levomaaa/csbproject1/blob/main/csbproject1/settings.py#L35.
 
 ### Description
 
-`DEBUG = True` in `settings.py`. This is a security risk because Djangos debug feuture shows error messages including database queries, stack traces, settings, etc, which can be exploited by attackers. This debug feature shared a lot of information which can also be sensitive. A screenshot below shows a small example what information you could get.
+`DEBUG = True` in `settings.py`. This is a security risk because Djangos debug feuture shows error messages including database queries, stack traces, settings, etc, which can be exploited by attackers. This debug feature shares a lot of information which can also be sensitive. The screenshot below shows a small example what information you could get.
 
 ### Fix
 
-Set the `DEBUG = True` in `settings.py` as `DEBUG = False`. Then the attacker is not able to see the debug feature. The fix is shown here: https://github.com/levomaaa/csbproject1/blob/main/csbproject1/settings.py#L34.
+Set the `DEBUG = True` in `settings.py` as `DEBUG = False`. Then the attacker is not able to see the debug feature anymore. The fix is shown here: https://github.com/levomaaa/csbproject1/blob/main/csbproject1/settings.py#L34.
 
 ### Screenshots
 
@@ -88,7 +89,7 @@ Set the `DEBUG = True` in `settings.py` as `DEBUG = False`. Then the attacker is
 
 ## Flaw 5 - Insecure Design
 
-I don't have a limit for login attempts. Located here: https://github.com/levomaaa/csbproject1/blob/main/pages/views.py#L13.
+This application does not have a limit for login attempts. Located here: https://github.com/levomaaa/csbproject1/blob/main/pages/views.py#L20.
 
 ### Description
 
@@ -96,7 +97,7 @@ Method `login_view` in `views.py` does not contain any login limiting or brute f
 
 ### Fix 
 
-We will fix this by tracking failed login attempts and limiting them to 5. After 5 failed login attempts the users account is locked for 30 seconds and after that they can try again. Error is shown after 5 failed attempts as shown in the screenshots. The fixes are shown in four parts below:
+We will fix this by tracking failed login attempts and limiting them to 5. After 5 failed login attempts the users account is locked for 30 seconds and after waiting they can try again. Error is shown after 5 failed attempts as we can see in the screenshots below. The fixes are shown in four parts below:
 - Fix 1/4: https://github.com/levomaaa/csbproject1/blob/main/pages/views.py#L11
 - Fix 2/4: https://github.com/levomaaa/csbproject1/blob/main/pages/views.py#L23
 - Fix 3/4: https://github.com/levomaaa/csbproject1/blob/main/pages/views.py#L34
