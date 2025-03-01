@@ -1,5 +1,7 @@
 # Cyber Security Base 2025 - Project 1
 
+I am using flaws from OWASP top 10 list published in 2021.
+
 LINK: https://github.com/levomaaa/csbproject1
 
 ## Installation
