@@ -2,7 +2,9 @@
 
 I am using flaws from OWASP top 10 list published in 2021.
 
-LINK: https://github.com/levomaaa/csbproject1
+This project contains a huge amount of security risks some of which are intentionally introduced for analysis and learning purposes. I have identified and proposed fixes for five different security flaws within this project. This is just the beginning, as there are still many more flaws and vulnerabilities present in this project. Fixing these vulnerabilities will strengthen the application's security and prevent potential exploitation in the real life.
+
+GITHUB LINK: https://github.com/levomaaa/csbproject1
 
 ## Installation
 
@@ -14,7 +16,7 @@ LINK: https://github.com/levomaaa/csbproject1
 
 ## Flaw 1 - Cross-Site Request Forgery (CSRF)
 
-This flaw occurs in two different cases below.
+This project does not have CSRF protection enabled. This flaw occurs in two different cases below.
 
 Case 1:
 - https://github.com/levomaaa/csbproject1/blob/main/pages/views.py#L19
